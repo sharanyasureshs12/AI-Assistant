@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Navigation Assistant for Visually Impaired - Voice-controlled navigation simulation with obstacle detection and emergency alerts.">
+    <title>AI Navigation Assistant for Visually Impaired</title>
+
+    <!-- Link to our CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header>
+        <h1>🦯 AI Navigation Assistant</h1>
+        <p class="subtitle">For Visually Impaired Users</p>
+    </header>
+
+    <!-- ===== STATUS BOX ===== -->
+    <!-- This box shows the current system message on screen -->
+    <section class="status-box" aria-live="polite" aria-label="System Status">
+        <p id="status-text">System Ready. Press a button or speak a command.</p>
+    </section>
+
+    <!-- ===== VOICE INPUT SECTION ===== -->
+    <section class="section">
+        <h2>🎤 Voice Commands</h2>
+        <p class="hint">Say: "start", "stop", "left", "right", or "help"</p>
+
+        <!-- Toggle the microphone on/off -->
+        <button id="btn-voice" class="btn btn-green" onclick="toggleVoice()">
+            🎙️ Start Listening
+        </button>
+
+        <!-- Shows what the microphone heard -->
+        <p id="voice-result" class="result-text">You said: (nothing yet)</p>
+    </section>
+
+    <!-- ===== NAVIGATION BUTTONS SECTION ===== -->
+    <section class="section">
+        <h2>🧭 Navigation Controls</h2>
+
+        <div class="btn-grid">
+            <!-- Each button calls the navigate() function with a direction -->
+            <button class="btn btn-blue" onclick="navigate('forward')">⬆️ Forward</button>
+            <button class="btn btn-blue" onclick="navigate('left')">⬅️ Left</button>
+            <button class="btn btn-blue" onclick="navigate('right')">➡️ Right</button>
+            <button class="btn btn-blue" onclick="navigate('stop')">🛑 Stop</button>
+        </div>
+    </section>
+
+    <!-- ===== OBSTACLE ALERT SECTION ===== -->
+    <section class="section">
+        <h2>⚠️ Obstacle Detection</h2>
+
+        <!-- Opens camera, scans, then gives a result -->
+        <button id="btn-obstacle" class="btn btn-yellow" onclick="checkObstacle()">
+            🔍 Check Obstacle
+        </button>
+
+        <!-- Camera feed - hidden by default, shown when scanning -->
+        <div id="camera-container" style="display:none; width:100%; max-width:400px; text-align:center;">
+            <!-- The live video from webcam -->
+            <video id="camera-feed" autoplay playsinline
+                   style="width:100%; border-radius:10px; border:2px solid #c79a00; margin-top:10px;">
+            </video>
+            <!-- Scanning label shown while camera is open -->
+            <p id="scanning-label" style="color:#f0c040; font-weight:600; margin-top:8px;">
+                📷 Scanning... please wait
+            </p>
+        </div>
+
+        <p id="obstacle-result" class="result-text">Obstacle status will appear here.</p>
+    </section>
+
+    <!-- ===== EMERGENCY SECTION ===== -->
+    <section class="section">
+        <h2>🆘 Emergency</h2>
+
+        <!-- Send a help alert -->
+        <button id="btn-help" class="btn btn-red" onclick="sendEmergency()">
+            🚨 HELP / Emergency
+        </button>
+
+        <p id="emergency-result" class="result-text">Emergency status will appear here.</p>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p>AI Navigation Assistant &mdash; Simple Demo for Visually Impaired</p>
+    </footer>
+
+    <!--
+        Hidden canvas used for pixel analysis only.
+        It is never shown to the user - JS draws video frames onto it
+        and reads pixel data to detect motion / activity per section.
+    -->
+    <canvas id="analysis-canvas" style="display:none;"></canvas>
+
+    <!-- Link to JS file (must be at bottom so HTML loads first) -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

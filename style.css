@@ -1,0 +1,237 @@
+/* ===========================================
+   style.css - Styling for AI Navigation App
+   High contrast: black background, white text
+   Large buttons, centered layout
+=========================================== */
+
+/* Import a clean, readable font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+/* ---- RESET & BASE ---- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0a0a0a;   /* Very dark background */
+    color: #ffffff;               /* White text for contrast */
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 24px;
+}
+
+/* ---- HEADER ---- */
+header {
+    text-align: center;
+    padding: 28px 20px 16px;
+    border-bottom: 2px solid #333;
+    width: 100%;
+    max-width: 700px;
+}
+
+header h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #f0f0f0;
+    letter-spacing: 1px;
+}
+
+header .subtitle {
+    font-size: 1rem;
+    color: #aaaaaa;
+    margin-top: 6px;
+}
+
+/* ---- STATUS BOX ---- */
+/* The main message display - large and easy to read */
+.status-box {
+    background-color: #1a1a2e;
+    border: 2px solid #4a90e2;
+    border-radius: 12px;
+    padding: 20px 28px;
+    text-align: center;
+    width: 100%;
+    max-width: 700px;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#status-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #7ec8e3;
+    line-height: 1.5;
+    transition: all 0.3s ease;
+}
+
+/* ---- SECTION CARDS ---- */
+/* Each feature is wrapped in a card */
+.section {
+    background-color: #161616;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    padding: 24px 28px;
+    width: 100%;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.section:hover {
+    border-color: #444;
+}
+
+.section h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #e0e0e0;
+    align-self: flex-start;  /* Left-align the heading */
+}
+
+.hint {
+    font-size: 0.9rem;
+    color: #888;
+    align-self: flex-start;
+}
+
+/* ---- BUTTONS ---- */
+/* Large, high-contrast buttons for easy use */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 18px 32px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 400px;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    letter-spacing: 0.5px;
+}
+
+/* Button hover effect - slight lift */
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    filter: brightness(1.1);
+}
+
+/* Button active (click) effect */
+.btn:active {
+    transform: translateY(0px);
+    filter: brightness(0.9);
+}
+
+/* Green - Start Listening */
+.btn-green {
+    background-color: #1e7e34;
+    color: #ffffff;
+}
+
+/* Blue - Navigation */
+.btn-blue {
+    background-color: #1a5fb4;
+    color: #ffffff;
+}
+
+/* Yellow - Obstacle Check */
+.btn-yellow {
+    background-color: #c79a00;
+    color: #000000;
+}
+
+/* Red - Emergency */
+.btn-red {
+    background-color: #c0392b;
+    color: #ffffff;
+    font-size: 1.3rem;
+    padding: 22px 32px;
+}
+
+/* Listening active state (pulsing) */
+.btn-listening {
+    background-color: #e74c3c !important;
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.6); }
+    70%  { box-shadow: 0 0 0 14px rgba(231, 76, 60, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+}
+
+/* ---- NAVIGATION BUTTON GRID ---- */
+/* 2x2 grid layout for directional buttons */
+.btn-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    width: 100%;
+    max-width: 480px;
+}
+
+.btn-grid .btn {
+    max-width: 100%;
+}
+
+/* ---- RESULT TEXT ---- */
+/* Shows feedback below each section */
+.result-text {
+    font-size: 1rem;
+    color: #aaaaaa;
+    text-align: center;
+    min-height: 28px;
+    transition: color 0.3s ease;
+    padding: 0 10px;
+}
+
+.result-text.active {
+    color: #f0f0f0;
+    font-weight: 600;
+}
+
+/* ---- FOOTER ---- */
+footer {
+    padding: 20px;
+    text-align: center;
+    color: #555;
+    font-size: 0.85rem;
+    border-top: 1px solid #222;
+    width: 100%;
+    max-width: 700px;
+    margin-top: auto;
+}
+
+/* ---- RESPONSIVE (Mobile) ---- */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.4rem;
+    }
+
+    .btn {
+        font-size: 1rem;
+        padding: 16px 20px;
+    }
+
+    .btn-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+}
